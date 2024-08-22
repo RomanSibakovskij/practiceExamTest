@@ -224,4 +224,170 @@ public class TestMethods extends BaseTest{
         assertTrue(loginPage.isLoginButtonDisplayed(), "The login button isn't displayed");
     }
 
+    //calculator page test methods
+    //addition operation
+    protected void validCalculatorInputPlusOptionTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        validUserAccountCreation(registerPage);
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        //web element assert
+        isCalculatorPageWebElementDisplayed(calculatorPage);
+        //input data
+        calculatorPage.inputData();
+        //singular inputs
+        calculatorPage.inputNumberOne();
+        calculatorPage.inputNumberTwo();
+        //local comparator
+        int number1 = calculatorPage.getNumber1();
+        int number2 = calculatorPage.getNumber2();
+        int expectedResult = number1 + number2;
+        //operator selection
+        calculatorPage.selectPlusOption();
+        //assert the plus was selected
+        verifyOperatorSelected(calculatorPage, "Sudėtis", calculatorPage.isPlusOperatorDisplayed());
+        //count button click
+        calculatorPage.clickCountButton();
+        //display the calculation result
+        calculatorPage.getCalculationResult();
+        logger.info("Calculation result: " + calculatorPage.getCalculationResult());
+        //local comparison of the result with the result displayed (in case the calculator doesn't display correct results)
+        int actualResult = Integer.parseInt(calculatorPage.getCalculationResult());
+        assertEquals(expectedResult, actualResult, "The local addition result is incorrect");
+        logger.info("The local answer is: " + actualResult);
+    }
+
+    //subtraction operation
+    protected void validCalculatorInputMinusOptionTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        validUserAccountCreation(registerPage);
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        //web element assert
+        isCalculatorPageWebElementDisplayed(calculatorPage);
+        //input data
+        calculatorPage.inputData();
+        //singular inputs
+        calculatorPage.inputNumberOne();
+        calculatorPage.inputNumberTwo();
+        //local comparator
+        int number1 = calculatorPage.getNumber1();
+        int number2 = calculatorPage.getNumber2();
+        int expectedResult = number1 - number2;
+        //operator selection
+        calculatorPage.selectMinusOption();
+        //assert the plus was selected
+        verifyOperatorSelected(calculatorPage, "Atimtis", calculatorPage.isPlusOperatorDisplayed());
+        //count button click
+        calculatorPage.clickCountButton();
+        //display the calculation result
+        calculatorPage.getCalculationResult();
+        logger.info("Calculation result: " + calculatorPage.getCalculationResult());
+        //local comparison of the result with the result displayed (in case the calculator doesn't display correct results)
+        int actualResult = Integer.parseInt(calculatorPage.getCalculationResult());
+        assertEquals(expectedResult, actualResult, "The local addition result is incorrect");
+        logger.info("The local answer is: " + actualResult);
+    }
+
+    //multiplication operation
+    protected void validCalculatorInputTimesOptionTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        validUserAccountCreation(registerPage);
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        //web element assert
+        isCalculatorPageWebElementDisplayed(calculatorPage);
+        //input data
+        calculatorPage.inputData();
+        //singular inputs
+        calculatorPage.inputNumberOne();
+        calculatorPage.inputNumberTwo();
+        //local comparator
+        int number1 = calculatorPage.getNumber1();
+        int number2 = calculatorPage.getNumber2();
+        int expectedResult = number1 * number2;
+        //operator selection
+        calculatorPage.selectTimesOption();
+        //assert the plus was selected
+        verifyOperatorSelected(calculatorPage, "Daugyba", calculatorPage.isPlusOperatorDisplayed());
+        //count button click
+        calculatorPage.clickCountButton();
+        //display the calculation result
+        calculatorPage.getCalculationResult();
+        logger.info("Calculation result: " + calculatorPage.getCalculationResult());
+        //local comparison of the result with the result displayed (in case the calculator doesn't display correct results)
+        int actualResult = Integer.parseInt(calculatorPage.getCalculationResult());
+        assertEquals(expectedResult, actualResult, "The local addition result is incorrect");
+        logger.info("The local answer is: " + actualResult);
+    }
+
+    //division operation
+    protected void validCalculatorInputDivideOptionTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        validUserAccountCreation(registerPage);
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        //web element assert
+        isCalculatorPageWebElementDisplayed(calculatorPage);
+        //input data
+        calculatorPage.inputData();
+        //singular inputs
+        calculatorPage.inputNumberOne();
+        calculatorPage.inputNumberTwo();
+        //local comparator
+        int number1 = calculatorPage.getNumber1();
+        int number2 = calculatorPage.getNumber2();
+        int expectedResult = number1 / number2;
+        //operator selection
+        calculatorPage.selectDivideOption();
+        //assert the plus was selected
+        verifyOperatorSelected(calculatorPage, "Dalyba", calculatorPage.isPlusOperatorDisplayed());
+        //count button click
+        calculatorPage.clickCountButton();
+        //display the calculation result
+        calculatorPage.getCalculationResult();
+        logger.info("Calculation result: " + calculatorPage.getCalculationResult());
+        //local comparison of the result with the result displayed (in case the calculator doesn't display correct results)
+        int actualResult = Integer.parseInt(calculatorPage.getCalculationResult());
+        assertEquals(expectedResult, actualResult, "The local addition result is incorrect");
+        logger.info("The local answer is: " + actualResult);
+    }
+
+    //invalid calculator page test methods (strings as variables)
+    //addition operation
+    protected void invalidCalculatorInputPlusOptionTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        validUserAccountCreation(registerPage);
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        //web element assert
+        isCalculatorPageWebElementDisplayed(calculatorPage);
+        //input data
+        calculatorPage.inputData();
+        //singular inputs
+        calculatorPage.inputNumberOne();
+        calculatorPage.inputNumberTwo();
+        //operator selection
+        calculatorPage.selectPlusOption();
+        //assert the plus was selected
+        verifyOperatorSelected(calculatorPage, "Sudėtis", calculatorPage.isPlusOperatorDisplayed());
+        //count button click
+        calculatorPage.clickCountButton();
+//        //display the calculation result
+//        calculatorPage.getCalculationResult();
+//        logger.info("Calculation result: " + calculatorPage.getCalculationResult());
+    }
+
+    //calculator page web element assert methods
+    protected void isCalculatorPageWebElementDisplayed(CalculatorPage calculatorPage){
+        //assert the number 1 input field is displayed
+        assertTrue(calculatorPage.isFirstNumberInputFieldDisplayed(), "The number 1 input field isn't displayed");
+        //assert the number 2 input field is displayed
+        assertTrue(calculatorPage.isSecondNumberInputFieldDisplayed(), "The number 2 input field isn't displayed");
+        //assert the operator selector is displayed
+        assertTrue(calculatorPage.isOperatorSelectorDisplayed(), "The operator selector isn't displayed");
+        //assert the count button is displayed
+        assertTrue(calculatorPage.isCountButtonDisplayed(), "The count button isn't displayed");
+    }
+    //selected operator assert method
+    protected void verifyOperatorSelected(CalculatorPage calculatorPage, String operator, boolean isSelected) {
+        assertTrue(isSelected, "The " + operator + " operator is not selected");
+        logger.info("The " + operator + " operator is selected\n");
+    }
+
 }

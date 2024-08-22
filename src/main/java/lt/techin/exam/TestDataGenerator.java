@@ -9,11 +9,10 @@ import java.util.List;
 import java.util.Random;
 
 public class TestDataGenerator extends BasePage{
+
+    //random number generator
     private static final int MIN = 1;
     private static final int MAX = 2500;
-
-
-
 
     // Generator instance
     private Random random;
