@@ -20,6 +20,10 @@ public class CalculatorPage extends BasePage{
     @FindBy(xpath = "//body/h2")
     private WebElement loginSuccess;
 
+    //calculation history element
+    @FindBy(xpath = "//li[@class='active']/a")
+    private WebElement calculationHistoryLink;
+
     //input fields
     @FindBy(xpath = "//input[@id='sk1']")
     private WebElement firstNumberInputField;
@@ -49,9 +53,19 @@ public class CalculatorPage extends BasePage{
     @FindBy(xpath = "//body/h4")
     private WebElement calculationResult;
 
+    //invalid input error messages
+    @FindBy(xpath = "//span[@id='sk1.errors']")
+    private WebElement firstNumberInvalidInputMessage;
+    @FindBy(xpath = "//span[@id='sk2.errors']")
+    private WebElement secondNumberInvalidInputMessage;
+
    //input data
     private int number1;
     private int number2;
+
+    //invalid input data
+    private int negativeNumber1 = -3;
+    private int negativeNumber2 = -6;
 
     public CalculatorPage(WebDriver driver) {
         super(driver);
@@ -59,6 +73,9 @@ public class CalculatorPage extends BasePage{
 
     //logout link click method
     public void clickLogOutLink(){logOutLink.click();}
+
+    //calculator history link click
+    public void clickCalculationHistoryLink(){calculationHistoryLink.click();}
 
     //data input methods
 
@@ -80,13 +97,53 @@ public class CalculatorPage extends BasePage{
         logger.info("Number 2: " + number2);
     }
 
-    //data input methods
+    //valid data input methods
     public void inputNumberOne() {
         firstNumberInputField.clear();
         firstNumberInputField.sendKeys(String.valueOf(number1));}
     public void inputNumberTwo() {
         secondNumberInputField.clear();
         secondNumberInputField.sendKeys(String.valueOf(number2));}
+
+    //invalid input methods (letters as variables)
+    public void inputLettersIntoNum1InputField(){
+        firstNumberInputField.clear();
+        firstNumberInputField.sendKeys("AsD");}
+    public void inputLettersIntoNum2InputField(){
+        secondNumberInputField.clear();
+        secondNumberInputField.sendKeys("BsD");}
+
+    //invalid input data getter
+    public void inputDataDivByZero() {
+        TestDataGenerator testDataGenerator = new TestDataGenerator(driver);
+
+        if (true) {
+            // number1 has to be greater than zero for the 'division by zero'
+            number1 = testDataGenerator.generateRandomNumber1();
+            while (number1 == 0) {
+                number1 = testDataGenerator.generateRandomNumber1();
+            }
+        }
+        number2 = 0;
+
+        if (number1 < number2) {
+            int temp = number1;
+            number1 = number2;
+            number2 = temp;
+        }
+
+        logger.info("Generated data: " + "\n");
+        logger.info("Number 1: " + number1);
+        logger.info("Number 2: " + number2);
+    }
+
+    //invalid input method (divide by zero)
+    public void inputZeroIntoNum2InputField(){secondNumberInputField.sendKeys(String.valueOf(0));}
+
+    //invalid input method (negative numbers)
+    public void inputNegativeNumberOne(){firstNumberInputField.sendKeys(String.valueOf(negativeNumber1));}
+
+
 
     //logical operators choice methods
     public void selectPlusOption() {plusOption.click();}
@@ -132,4 +189,7 @@ public class CalculatorPage extends BasePage{
     public String getNumber1Values(){return firstNumberInputField.getAttribute("value");}
     public String getNumber2Values(){return secondNumberInputField.getAttribute("value");}
 
+    //invalid input message getters
+    public String getFirstNumberInvalidMessage(){return firstNumberInvalidInputMessage.getText();}
+    public String getSecondNumberInvalidMessage(){return secondNumberInvalidInputMessage.getText();}
 }

@@ -149,9 +149,9 @@ public class RegisterPage extends BasePage{
         logger.info("Too long password: " + tooLongPassword);
         logger.info(("Too long confirm password: " + tooLongConfirmPassword));
     }
-    public void inputTooLongUserFirstName(){userNameInputField.sendKeys(tooShortUserName);}
-    public void inputTooLongUserPassword(){passwordInputField.sendKeys(tooShortPassword);}
-    public void inputTooLongConfirmUserPassword(){confirmPasswordInputField.sendKeys(tooShortConfirmPassword);}
+    public void inputTooLongUserFirstName(){userNameInputField.sendKeys(tooLongUserName);}
+    public void inputTooLongUserPassword(){passwordInputField.sendKeys(tooLongPassword);}
+    public void inputTooLongConfirmUserPassword(){confirmPasswordInputField.sendKeys(tooLongConfirmPassword);}
 
 
     public void clickCreateButton() {

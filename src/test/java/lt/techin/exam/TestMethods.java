@@ -254,6 +254,8 @@ public class TestMethods extends BaseTest{
         int actualResult = Integer.parseInt(calculatorPage.getCalculationResult());
         assertEquals(expectedResult, actualResult, "The local addition result is incorrect");
         logger.info("The local answer is: " + actualResult);
+        //calculation history click
+        calculatorPage.clickCalculationHistoryLink();
     }
 
     //subtraction operation
@@ -285,6 +287,8 @@ public class TestMethods extends BaseTest{
         int actualResult = Integer.parseInt(calculatorPage.getCalculationResult());
         assertEquals(expectedResult, actualResult, "The local addition result is incorrect");
         logger.info("The local answer is: " + actualResult);
+        //calculation history click
+        calculatorPage.clickCalculationHistoryLink();
     }
 
     //multiplication operation
@@ -316,6 +320,8 @@ public class TestMethods extends BaseTest{
         int actualResult = Integer.parseInt(calculatorPage.getCalculationResult());
         assertEquals(expectedResult, actualResult, "The local addition result is incorrect");
         logger.info("The local answer is: " + actualResult);
+        //calculation history click
+        calculatorPage.clickCalculationHistoryLink();
     }
 
     //division operation
@@ -347,6 +353,8 @@ public class TestMethods extends BaseTest{
         int actualResult = Integer.parseInt(calculatorPage.getCalculationResult());
         assertEquals(expectedResult, actualResult, "The local addition result is incorrect");
         logger.info("The local answer is: " + actualResult);
+        //calculation history click
+        calculatorPage.clickCalculationHistoryLink();
     }
 
     //invalid calculator page test methods (strings as variables)
@@ -360,17 +368,177 @@ public class TestMethods extends BaseTest{
         //input data
         calculatorPage.inputData();
         //singular inputs
+        calculatorPage.inputLettersIntoNum1InputField();
+        calculatorPage.inputLettersIntoNum2InputField();
+        //operator selection
+        calculatorPage.selectPlusOption();
+        //count button click
+        calculatorPage.clickCountButton();
+        //assert the correct error message is displayed
+        assertEquals(calculatorPage.getFirstNumberInvalidMessage(), "Failed to convert property value of type java.lang.String to required type int for property sk1; nested exception is java.lang.NumberFormatException: For input string: \"\"", "The error message wasn't displayed");
+        assertEquals(calculatorPage.getSecondNumberInvalidMessage(), "Failed to convert property value of type java.lang.String to required type int for property sk2; nested exception is java.lang.NumberFormatException: For input string: \"\"", "The error message wasn't displayed");
+    }
+
+    //invalid subtraction operation
+    protected void invalidCalculatorInputMinusOptionTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        validUserAccountCreation(registerPage);
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        //web element assert
+        isCalculatorPageWebElementDisplayed(calculatorPage);
+        //input data
+        calculatorPage.inputData();
+        //singular inputs
+        calculatorPage.inputLettersIntoNum1InputField();
+        calculatorPage.inputLettersIntoNum2InputField();
+        //operator selection
+        calculatorPage.selectMinusOption();
+        //count button click
+        calculatorPage.clickCountButton();
+        //assert the correct error message is displayed
+        assertEquals(calculatorPage.getFirstNumberInvalidMessage(), "Failed to convert property value of type java.lang.String to required type int for property sk1; nested exception is java.lang.NumberFormatException: For input string: \"\"", "The error message wasn't displayed");
+        assertEquals(calculatorPage.getSecondNumberInvalidMessage(), "Failed to convert property value of type java.lang.String to required type int for property sk2; nested exception is java.lang.NumberFormatException: For input string: \"\"", "The error message wasn't displayed");
+    }
+
+    //invalid multiplication operation
+    protected void invalidCalculatorInputTimesOptionTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        validUserAccountCreation(registerPage);
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        //web element assert
+        isCalculatorPageWebElementDisplayed(calculatorPage);
+        //input data
+        calculatorPage.inputData();
+        //singular inputs
+        calculatorPage.inputLettersIntoNum1InputField();
+        calculatorPage.inputLettersIntoNum2InputField();
+        //operator selection
+        calculatorPage.selectTimesOption();
+        //count button click
+        calculatorPage.clickCountButton();
+        //assert the correct error message is displayed
+        assertEquals(calculatorPage.getFirstNumberInvalidMessage(), "Failed to convert property value of type java.lang.String to required type int for property sk1; nested exception is java.lang.NumberFormatException: For input string: \"\"", "The error message wasn't displayed");
+        assertEquals(calculatorPage.getSecondNumberInvalidMessage(), "Failed to convert property value of type java.lang.String to required type int for property sk2; nested exception is java.lang.NumberFormatException: For input string: \"\"", "The error message wasn't displayed");
+    }
+
+    //invalid division operation
+    protected void invalidCalculatorInputDivideOptionTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        validUserAccountCreation(registerPage);
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        //web element assert
+        isCalculatorPageWebElementDisplayed(calculatorPage);
+        //input data
+        calculatorPage.inputData();
+        //singular inputs
+        calculatorPage.inputLettersIntoNum1InputField();
+        calculatorPage.inputLettersIntoNum2InputField();
+        //operator selection
+        calculatorPage.selectDivideOption();
+        //count button click
+        calculatorPage.clickCountButton();
+        //assert the correct error message is displayed
+        assertEquals(calculatorPage.getFirstNumberInvalidMessage(), "Failed to convert property value of type java.lang.String to required type int for property sk1; nested exception is java.lang.NumberFormatException: For input string: \"\"", "The error message wasn't displayed");
+        assertEquals(calculatorPage.getSecondNumberInvalidMessage(), "Failed to convert property value of type java.lang.String to required type int for property sk2; nested exception is java.lang.NumberFormatException: For input string: \"\"", "The error message wasn't displayed");
+    }
+
+    //invalid division operation (divide by zero)
+    protected void invalidCalculatorInputDivideOptionByZeroTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        validUserAccountCreation(registerPage);
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        //web element assert
+        isCalculatorPageWebElementDisplayed(calculatorPage);
+        //input data
+        calculatorPage.inputDataDivByZero();
+        //singular inputs
         calculatorPage.inputNumberOne();
+        calculatorPage.inputZeroIntoNum2InputField();
+        //operator selection
+        calculatorPage.selectDivideOption();
+        //count button click
+        calculatorPage.clickCountButton();
+    }
+
+    //invalid calculator page test methods (negative numbers)
+    //invalid addition operation
+    protected void invalidInputNegativeNumberOnePlusOptionTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        validUserAccountCreation(registerPage);
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        //web element assert
+        isCalculatorPageWebElementDisplayed(calculatorPage);
+        //input data
+        calculatorPage.inputData();
+        //singular inputs
+        calculatorPage.inputNegativeNumberOne();
         calculatorPage.inputNumberTwo();
         //operator selection
         calculatorPage.selectPlusOption();
-        //assert the plus was selected
-        verifyOperatorSelected(calculatorPage, "Sudėtis", calculatorPage.isPlusOperatorDisplayed());
         //count button click
         calculatorPage.clickCountButton();
-//        //display the calculation result
-//        calculatorPage.getCalculationResult();
-//        logger.info("Calculation result: " + calculatorPage.getCalculationResult());
+        //assert the correct error message is displayed
+        assertEquals(calculatorPage.getFirstNumberInvalidMessage(), "Validacijos klaida: skaičius negali būti neigiamas", "The error message wasn't displayed");
+    }
+
+    //invalid subtraction operation
+    protected void invalidInputNegativeNumberOneMinusOptionTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        validUserAccountCreation(registerPage);
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        //web element assert
+        isCalculatorPageWebElementDisplayed(calculatorPage);
+        //input data
+        calculatorPage.inputData();
+        //singular inputs
+        calculatorPage.inputNegativeNumberOne();
+        calculatorPage.inputNumberTwo();
+        //operator selection
+        calculatorPage.selectMinusOption();
+        //count button click
+        calculatorPage.clickCountButton();
+        //assert the correct error message is displayed
+        //assertEquals(calculatorPage.getFirstNumberInvalidMessage(), "Validacijos klaida: skaičius negali būti neigiamas", "The error message wasn't displayed");
+    }
+
+    //invalid multiplication operation
+    protected void invalidInputNegativeNumberOneTimesOptionTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        validUserAccountCreation(registerPage);
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        //web element assert
+        isCalculatorPageWebElementDisplayed(calculatorPage);
+        //input data
+        calculatorPage.inputData();
+        //singular inputs
+        calculatorPage.inputNegativeNumberOne();
+        calculatorPage.inputNumberTwo();
+        //operator selection
+        calculatorPage.selectTimesOption();
+        //count button click
+        calculatorPage.clickCountButton();
+        //assert the correct error message is displayed
+        //assertEquals(calculatorPage.getFirstNumberInvalidMessage(), "Validacijos klaida: skaičius negali būti neigiamas", "The error message wasn't displayed");
+    }
+
+    //invalid division operation
+    protected void invalidInputNegativeNumberOneDivideOptionTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        validUserAccountCreation(registerPage);
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        //web element assert
+        isCalculatorPageWebElementDisplayed(calculatorPage);
+        //input data
+        calculatorPage.inputData();
+        //singular inputs
+        calculatorPage.inputNegativeNumberOne();
+        calculatorPage.inputNumberTwo();
+        //operator selection
+        calculatorPage.selectDivideOption();
+        //count button click
+        calculatorPage.clickCountButton();
+        //assert the correct error message is displayed
+        //assertEquals(calculatorPage.getFirstNumberInvalidMessage(), "Validacijos klaida: skaičius negali būti neigiamas", "The error message wasn't displayed");
     }
 
     //calculator page web element assert methods

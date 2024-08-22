@@ -90,7 +90,7 @@ public class RegisterPageTest extends TestMethods {
     void tooLongUserNameCreationTest(){
 
         RegisterPage registerPage = new RegisterPage(driver);
-        tooShortUserNameAccountCreationTest(registerPage);
+        tooLongUserNameAccountCreationTest(registerPage);
         //assert the expected error message appears
         assertEquals(registerPage.getInvalidUserNameMessage(), "Privaloma įvesti nuo 3 iki 32 simbolių", "The error message didn't appear");
     }
@@ -102,7 +102,7 @@ public class RegisterPageTest extends TestMethods {
     void tooLongPasswordCreationTest(){
 
         RegisterPage registerPage = new RegisterPage(driver);
-        tooShortPasswordAccountCreationTest(registerPage);
+        tooLongPasswordAccountCreationTest(registerPage);
         //assert the expected error message appears
         assertEquals(registerPage.getInvalidPasswordMessage(), "Privaloma įvesti bent 3 simbolius", "The error message didn't appear"); //it doesn't have a valid too long password error message so the standard msg was used instead
     }
