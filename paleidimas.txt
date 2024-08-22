@@ -1,0 +1,13 @@
+Egzamino aplkacija su H2 duomenu baze (nereikia paleidinėti ir importuoti failus MySQL). 
+Paleidimas:
+
+I. variantas 
+Paleisti iš IntelliJ/Eclipse.
+Projekto paleidimo klasė- CalculatorApplication.
+
+II. variantas 
+Paleisti iš komandinės eilutės
+mvn spring-boot:run
+
+arba
+.\mvnw spring-boot:run
